@@ -15,14 +15,17 @@
 class GameTitle :public GameBase
 {
 private:
-	int cnt;
+	int cnt;		//フレームカウント
 
 public:
-
+	//コンストラクタ
 	GameTitle();
+	//デストラクタ
 	~GameTitle();
 
+	//更新処理
 	void Update();
+	//描画処理
 	void Render();
 	
 };

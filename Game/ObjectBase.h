@@ -39,27 +39,48 @@ public:
 	~ObjectBase();
 
 	//メンバ関数
+	//グラフィックハンドル関係関数
 	Texture* GetHandle();
 	void SetHandle(Texture* h);
+
+	//元画像のｘ座標関係関数
 	int GetGrpX();
 	void SetGrpX(int x);
+
+	//元画像のｙ座標関係関数
 	int GetGrpY();
 	void SetGrpY(int y);
+
+	//元画像の幅関係関数
 	int GetGrpW();
 	void SetGrpW(int w);
+
+	//元画像の高さ関係関数
 	int GetGrpH();
 	void SetGrpH(int h);
+
+	//座標x関係関数
 	float GetPosX();
 	void SetPosX(float x);
+
+	//座標y関係関数
 	float GetPosY();
 	void SetPosY(float y);
+
+	//速度x関係関数
 	float GetSpdX();
 	void SetSpdX(float sx);
+
+	//速度y関係関数
 	float GetSpdY();
 	void SetSpdY(float sy);
+
+	//状態関係関数
 	int GetState();
 	void SetState(int state);
 
+	//更新処理
 	void Update();
+	//描画処理
 	void Render();
 };

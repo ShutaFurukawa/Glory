@@ -11,8 +11,8 @@
 // 多重インクルードの防止 ==================================================
 #pragma once
 
-class GameBase{
-
+class GameBase
+{
 public:
 
 	virtual ~GameBase(){};

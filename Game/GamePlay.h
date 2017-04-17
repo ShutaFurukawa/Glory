@@ -14,8 +14,6 @@
 #include "Player.h"
 #include "Enemy.h"
 
-#define ENEMY_MAX 20
-
 class GamePlay :public GameBase
 {
 private:
@@ -23,15 +21,21 @@ private:
 	int mx;
 	int my;
 
+	//プレイヤーオブジェクト
 	Player* player;
-	Enemy* enemy[ENEMY_MAX];
+	//エネミーオブジェクト
+	Enemy* enemy;
 
 public:
 
+	//コンストラクタ
 	GamePlay();
+	//デストラクタ
 	~GamePlay();
 
+	//更新処理
 	void Update();
+	//描画処理
 	void Render();
 	
 };

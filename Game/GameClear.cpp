@@ -53,12 +53,6 @@ void GameClear::Update(void)
 {
 	cnt++;
 
-	//スペースキー点滅用
-	if (cnt > 120)
-	{
-		cnt = 0;
-	}
-
 	//スペースキーでタイトルに遷移
 	if (g_keyTracker->pressed.Space)
 	{

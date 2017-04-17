@@ -15,14 +15,18 @@
 class GameLogo :public GameBase
 {
 private:
-	int cnt;
+	int cnt;		//フレームカウント
 	int* p;			//メモリーリーク検証用
-public:
 
+public:
+	//コンストラクタ
 	GameLogo();
+	//デストラクタ
 	~GameLogo();
 
+	//更新処理
 	void Update();
+	//描画処理
 	void Render();
 	
 };

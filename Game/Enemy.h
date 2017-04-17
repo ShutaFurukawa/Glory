@@ -18,6 +18,8 @@
 //クラスの定義
 class Enemy :public ObjectBase
 {
+private:
+
 public:
 	Enemy();		//コンストラクタ 
 	~Enemy();		//デストラクタ

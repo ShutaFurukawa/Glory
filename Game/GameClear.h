@@ -15,14 +15,17 @@
 class GameClear :public GameBase
 {
 private:
-	int cnt;
+	int cnt;		//フレームカウント
 
 public:
-
+	//コンストラクタ
 	GameClear();
+	//デストラクタ
 	~GameClear();
 
+	//更新処理
 	void Update();
+	//描画処理
 	void Render();
 	
 };
