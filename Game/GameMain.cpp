@@ -1,12 +1,12 @@
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file   GameMain.cpp
-//!
-//! @brief  ゲーム関連のソースファイル
-//!
-//! @date   日付		2016/07/08
-//!
-//! @author 制作者名	T.Hasegawa
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//*--------------------------------------------------------------*//
+//= @file   名前:GameMain.cpp
+//=
+//= @brief  概要:ゲーム関連のソースファイル
+//=
+//= @date   日付:2016/2/4
+//=
+//= @author 製作者:ShutaFurukawa
+//*--------------------------------------------------------------*//
 
 // ヘッダファイルの読み込み ================================================
 #define _GAMEMAIN_
@@ -28,35 +28,22 @@
 
 #pragma comment(lib,"cri_ware_pcx86_LE_import.lib")
 
+//名前空間
 using namespace DirectX::SimpleMath;
 using namespace DirectX;
 using namespace std;
 
-// プロトタイプ宣言 ====================================================
-void importData(string filename);
-
-
-// グローバル変数の定義 ====================================================
-GameBase *base;
-
-
-// 関数の定義 ==============================================================
-
 //----------------------------------------------------------------------
-//! @brief ゲームの初期化処理
+//! @brief コンストラクタ
 //!
 //! @param[in] なし
-//!
-//! @return なし
 //----------------------------------------------------------------------
-void InitializeGame(void)
+GameMain::GameMain()
 {
-	int i;			//カウンタ
+	m_scene = PLAY;
+	m_NextScene = m_scene;
 
-	importData("map.csv");
-	//　画像の読み込み 
-	g_grpHandle = new Texture(L"Resources\\Images\\TridentLogo.png");
-	g_PongImage = new Texture(L"Resources\\Images\\PongImage.png");
+	base = new GamePlay();
 
 	//音の読み込み
 	//g_se = LoadSoundMem("Resources\\Sounds\\SE00.ogg");
@@ -64,14 +51,16 @@ void InitializeGame(void)
 	ADX2Le::LoadAcb("Resources\\Sounds\\CueSheet_0.acb");
 	ADX2Le::Play(CRI_CUESHEET_0__CUE_ID_0);
 
-	g_scene = PLAY;
-	g_NextScene = g_scene;
-	//g_init = 0;
-
-	base = new GamePlay();
 }
 
-
+//----------------------------------------------------------------------
+//! @brief デストラクタ
+//----------------------------------------------------------------------
+GameMain::~GameMain()
+{
+	ADX2Le::Finalize();
+	delete base;
+}
 
 //----------------------------------------------------------------------
 //! @brief ゲームの更新処理
@@ -80,19 +69,19 @@ void InitializeGame(void)
 //!
 //! @return なし
 //----------------------------------------------------------------------
-void UpdateGame(void)
+void GameMain::UpdateGame(void)
 {
 	ADX2Le::Update();
 
 	//シーン管理
-	if (g_scene != g_NextScene)
+	if (m_scene != m_NextScene)
 	{
-		g_scene = g_NextScene;
+		m_scene = m_NextScene;
 
 		//シーン削除
-		//delete base;
+		delete base;
 		//シーン生成
-		switch (g_scene)
+		switch (m_scene)
 		{
 		case LOGO:
 			base = new GameLogo();
@@ -114,11 +103,8 @@ void UpdateGame(void)
 
 	}
 
-
 	base->Update();
 }
-
-
 
 //----------------------------------------------------------------------
 //! @brief ゲームの描画処理
@@ -127,26 +113,10 @@ void UpdateGame(void)
 //!
 //! @return なし
 //----------------------------------------------------------------------
-void RenderGame(void)
+void GameMain::RenderGame(void)
 {
 	base->Render();
 }
-
-
-
-//----------------------------------------------------------------------
-//! @brief ゲームの終了処理
-//!
-//! @param[in] なし
-//!
-//! @return なし
-//----------------------------------------------------------------------
-void FinalizeGame(void)
-{
-	ADX2Le::Finalize();
-	//delete base;
-}
-
 
 //----------------------------------------------------------------------
 //! @brief 数値描画処理
@@ -155,7 +125,7 @@ void FinalizeGame(void)
 //!
 //! @return なし
 //----------------------------------------------------------------------
-void DrawNum(int x, int y, int n)
+void GameMain::DrawNum(int x, int y, int n)
 {
 	int w = n;		//計算用
 	int i = 0;		//文字数
@@ -178,41 +148,22 @@ void DrawNum(int x, int y, int n)
 }
 
 //----------------------------------------------------------------------
-//! @brief CSVファイルの読み込み
+//! @brief シーン遷移処理
 //!
-//! @param[in] ファイル名
+//! @param[in] シーン情報
 //!
 //! @return なし
 //----------------------------------------------------------------------
-void importData(string filename)
+void GameMain::Transition(int NextScene)
 {
-	ifstream ifs(filename);
-	string str;
-	int i;
 
-	if (!ifs) {
-		for (i = 0; i < MAX_TIP; i++)
-		{
-			g_map[i / 20][i % 20] = 4;
-		}
-		return;
-	}
-
-	i = 0;
-	while (getline(ifs, str)){
-		string token;
-		istringstream stream(str);
-
-		//1行のうち、文字列とコンマを分割する
-		while (getline(stream, token, ',')){
-			//すべて文字列として読み込まれるため
-			//数値は変換が必要
-			g_map[i / 20][i % 20] = atoi(token.c_str());
-			i++;
-		}
-		g_map[i / 20][i % 20] = atoi(token.c_str());
-	}
 }
 
-
+//----------------------------------------------------------------------
+//! @brief シーン遷移処理
+//!
+//! @param[in] シーン情報
+//!
+//! @return なし
+//----------------------------------------------------------------------
 

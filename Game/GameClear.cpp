@@ -1,40 +1,36 @@
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file   GameClear.cpp
-//!
-//! @brief  ゲームクリア処理のソースファイル
-//!
-//! @date   日付		2016/07/08
-//!
-//! @author 制作者名	T.Hasegawa
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//*--------------------------------------------------------------*//
+//= @file   名前:GameClear.cpp
+//=
+//= @brief  概要:クリア処理のソースファイル
+//=
+//= @date   日付:2016/2/4
+//=
+//= @author 製作者:ShutaFurukawa
+//*--------------------------------------------------------------*//
 
 // ヘッダファイルの読み込み ================================================
 #include "GameMain.h"
 #include "GameClear.h"
 
+// 名前空間
 using namespace DirectX::SimpleMath;
 using namespace DirectX;
 
 
 //----------------------------------------------------------------------
-//! @brief コンストラクタ処理
+//! @brief コンストラクタ
 //!
 //! @param[in] なし
-//!
-//! @return なし
 //----------------------------------------------------------------------
 GameClear::GameClear()
 {
+	//カウント初期化
 	cnt = 0;
 
 }
 
 //----------------------------------------------------------------------
-//! @brie　デストラクタ処理
-//!
-//! @param[in] なし
-//!
-//! @return なし
+//! @brief デストラクタ
 //----------------------------------------------------------------------
 GameClear::~GameClear(void)
 {
@@ -72,24 +68,11 @@ void GameClear::Update(void)
 //----------------------------------------------------------------------
 void GameClear::Render(void)
 {
-	//RECT rect;			// 絵の左上の座標と右下の座標編集用
-	//wchar_t buf[256];	//文字列編集用
+	wchar_t buf[256];	//文字列編集用
 
-	//rect = { 64, 224, 160, 256 };
-	//g_spriteBatch->Draw(g_PongImage->m_pTexture, Vector2(265, 200),
-	//	&rect, Colors::White, 0.0f, Vector2(0, 0), 1.0f);
-
-	////swprintf_s(buf, 256, L"SPACE");		//文字列編集
-	//if (g_TimeCnt < 100)
-	//{
-	//	//g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(280, 380));
-	//	rect = { 0, 224, 64, 256 };
-	//	g_spriteBatch->Draw(g_PongImage->m_pTexture, Vector2(280, 380),
-	//		&rect, Colors::White, 0.0f, Vector2(0, 0), 1.0f);
-	//}
-
-	//swprintf_s(buf, 256, L"CLEAR");		//文字列編集
-	//g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(100, 0));
+	swprintf_s(buf, 256, L"CLEAR");		//文字列編集
+	//文字の描画
+	g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(100, 0));
 
 
 }

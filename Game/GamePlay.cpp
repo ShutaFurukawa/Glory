@@ -1,12 +1,12 @@
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file   GamePlay.cpp
-//!
-//! @brief  ゲームプレイ処理のソースファイル
-//!
-//! @date   日付		2016/07/08
-//!
-//! @author 制作者名	T.Hasegawa
-//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//*--------------------------------------------------------------*//
+//= @file   名前:GamePlay.cpp
+//=
+//= @brief  概要:プレイ処理のヘッダファイル
+//=
+//= @date   日付:2016/2/4
+//=
+//= @author 製作者:ShutaFurukawa
+//*--------------------------------------------------------------*//
 
 // ヘッダファイルの読み込み ================================================
 #include "GameMain.h"
@@ -16,52 +16,33 @@
 
 #include <time.h>
 
+//名前空間
 using namespace DirectX::SimpleMath;
 using namespace DirectX;
 
 //----------------------------------------------------------------------
-//! @brief コンストラクタ処理
+//! @brief コンストラクタ
 //!
 //! @param[in] なし
-//!
-//! @return なし
 //----------------------------------------------------------------------
 GamePlay::GamePlay()
 {
+	//ランダム性を取得
 	srand((unsigned int)time(NULL));
 
 	//プレイヤーはオブジェクトクラスの派生クラスである
 	player = new Player();
 	//エネミーポインタを作ることで配列化をしている
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		enemy[i] = new Enemy();
-	}
-
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		if (enemy[i]->GetState() == 1)
-		{
-			enemy[i]->SetSpdX((rand() % 5 + 1)*-1);
-		}
-	}
-
+	enemy = new Enemy();
 }
 
 //----------------------------------------------------------------------
-//! @brie　デストラクタ処理
-//!
-//! @param[in] なし
-//!
-//! @return なし
+//! @brief デストラクタ
 //----------------------------------------------------------------------
 GamePlay::~GamePlay(void)
 {
 	delete player;
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		delete enemy[i];
-	}
+	delete enemy;
 }
 
 
@@ -85,42 +66,14 @@ void GamePlay::Update(void)
 	player->SetSpdY(g_mouse.y - my);
 	my = g_mouse.y;
 
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		if (enemy[i]->GetState() == 0)
-		{
-			enemy[i]->SetPosX(640);
-			enemy[i]->SetPosY((rand() % 15 + 1) * 32);
-			enemy[i]->SetState(1);
-		}
-	}
-
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		if (enemy[i]->GetState() == 1)
-		{
-			if (enemy[i]->GetPosX() <= -32)
-			{
-				enemy[i]->SetState(0);
-			}
-		}
-	}
-
 	//プレイヤーの座標変更
 	player->Update();
-	for (int i = 0; i < ENEMY_MAX; i++)
+	enemy->Update();
+
+	//スペースキーでプレイに遷移
+	if (g_keyTracker->pressed.Space)
 	{
-		enemy[i]->Update();
-	}
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		if ((enemy[i]->GetPosX() <= player->GetPosX() + player->GetGrpW()) &&
-			(enemy[i]->GetPosX() + enemy[i]->GetGrpW() >= player->GetPosX()) &&
-			(enemy[i]->GetPosY() <= player->GetPosY() + player->GetGrpH()) &&
-			(enemy[i]->GetPosY() + enemy[i]->GetGrpH() >= player->GetPosY()))
-		{
-			g_NextScene = OVER;
-		}
+		g_NextScene = OVER;
 	}
 }
 
@@ -135,8 +88,5 @@ void GamePlay::Render(void)
 {
 	//プレイヤーの描画処理
 	player->Render();
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		enemy[i]->Render();
-	}
+	enemy->Render();
 }
