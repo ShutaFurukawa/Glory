@@ -48,8 +48,8 @@ void GameOver::Update(void)
 	//スペースキーでタイトルに遷移
 	if (g_mouseTracker->leftButton)
 	{
-		g_NextScene = PLAY;
-
+		game->Transition(PLAY);
+		game->UpdateGame();
 	}
 
 }
@@ -64,10 +64,6 @@ void GameOver::Update(void)
 //----------------------------------------------------------------------
 void GameOver::Render(void)
 {
-	wchar_t buf[256];	//文字列編集用
-
-	swprintf_s(buf, 256, L"OVER");		//文字列編集
-	g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(100, 0));
 
 }
 

@@ -52,8 +52,8 @@ void GameClear::Update(void)
 	//スペースキーでタイトルに遷移
 	if (g_keyTracker->pressed.Space)
 	{
-		g_NextScene = TITLE;
-
+		game->Transition(TITLE);
+		game->UpdateGame();
 	}
 
 }
@@ -68,12 +68,6 @@ void GameClear::Update(void)
 //----------------------------------------------------------------------
 void GameClear::Render(void)
 {
-	wchar_t buf[256];	//文字列編集用
-
-	swprintf_s(buf, 256, L"CLEAR");		//文字列編集
-	//文字の描画
-	g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(100, 0));
-
 
 }
 

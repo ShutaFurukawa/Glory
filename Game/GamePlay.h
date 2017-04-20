@@ -26,6 +26,8 @@ private:
 	//エネミーオブジェクト
 	Enemy* enemy;
 
+	GameMain* game;		//ゲームメイン
+
 public:
 
 	//コンストラクタ

@@ -17,7 +17,6 @@
 #define EXTERN
 #endif
 
-
 #include <windows.h>
 #include <d3d11.h>
 #include <SimpleMath.h>
@@ -28,7 +27,7 @@
 // 定数の定義 ==============================================================
 
 // ゲームタイトル
-#define GAME_TITLE "Sokoban"
+#define GAME_TITLE "Glory"
 
 // ゲーム画面
 #define SCREEN_WIDTH  640    // 幅[pixel]
@@ -46,7 +45,7 @@ enum SCENE
 };
 
 //クラスの定義
-class GameMain :public GameBase
+class GameMain
 {
 	//非公開メンバ
 private:
@@ -56,9 +55,9 @@ private:
 	int g_TimeCnt;				//時間カウンタ
 	int g_Time;					//秒数
 
-	GameBase *base;				//ゲームベースのオブジェクト
+	wchar_t m_buf[256];			//文字列編集用
 
-	string filename;			//ファイル名
+	GameBase *base;				//ゲームベースのオブジェクト
 
 	//公開メンバ
 public:
@@ -76,5 +75,5 @@ public:
 	// シーン遷移処理
 	void Transition(int NextScene);
 	// 文字列描画処理
-	void DrawString();
+	void DrawString(int x, int y, std::string str);
 };

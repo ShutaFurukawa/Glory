@@ -18,6 +18,8 @@ private:
 	int cnt;		//フレームカウント
 	int* p;			//メモリーリーク検証用
 
+	GameMain* game;		//ゲームメイン
+
 public:
 	//コンストラクタ
 	GameLogo();

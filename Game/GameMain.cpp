@@ -78,8 +78,6 @@ void GameMain::UpdateGame(void)
 	{
 		m_scene = m_NextScene;
 
-		//シーン削除
-		delete base;
 		//シーン生成
 		switch (m_scene)
 		{
@@ -156,14 +154,20 @@ void GameMain::DrawNum(int x, int y, int n)
 //----------------------------------------------------------------------
 void GameMain::Transition(int NextScene)
 {
-
+	m_NextScene = NextScene;
 }
 
 //----------------------------------------------------------------------
-//! @brief シーン遷移処理
+//! @brief 文字列描画処理
 //!
-//! @param[in] シーン情報
+//! @param[in] なし
 //!
 //! @return なし
 //----------------------------------------------------------------------
-
+void GameMain::DrawString(int x,int y,string str)
+{
+	//文字列編集
+	swprintf_s(m_buf, 256, L"%s", str);
+	//文字の描画
+	g_spriteFont->DrawString(g_spriteBatch.get(), m_buf, Vector2(x, y));
+}

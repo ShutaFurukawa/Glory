@@ -78,7 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DirectXTK_Initialize();
 
 
-	InitializeGame();		//ゲームの初期化処理
+	GameMain Main;		//ゲームの初期化処理
 
 
 	// メインループ
@@ -106,7 +106,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				break;
 			}
 
-			UpdateGame();		//ゲームの更新処理
+			Main.UpdateGame();		//ゲームの更新処理
 
 
 			// バックバッファのクリア
@@ -119,7 +119,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			g_spriteBatch->Begin(SpriteSortMode_Deferred, g_pCommonStates->NonPremultiplied(), g_pCommonStates->PointClamp());
 
 
-			RenderGame();		//ゲームの描画処理
+			Main.RenderGame();		//ゲームの描画処理
 
 
 			//// fpsの表示
@@ -134,10 +134,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			g_pSwapChain->Present(0, 0);
 		}
 	}
-
-
-	FinalizeGame();		//ゲームの後始末処理
-
 
 	// DirectXデバイス周りの終了処理
 	Direct3D_CleanupDevice();

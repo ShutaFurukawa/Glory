@@ -13,6 +13,7 @@
 
 class GameBase
 {
+
 public:
 
 	virtual ~GameBase(){};

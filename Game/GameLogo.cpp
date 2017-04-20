@@ -25,6 +25,7 @@ GameLogo::GameLogo()
 {
 	cnt = 0;
 	p = new int[5];				//メモリーリーク検証用
+
 }
 
 //----------------------------------------------------------------------
@@ -33,6 +34,7 @@ GameLogo::GameLogo()
 GameLogo::~GameLogo(void)
 {
 	delete p;					//メモリーリーク検証用
+
 }
 
 //----------------------------------------------------------------------
@@ -49,7 +51,8 @@ void GameLogo::Update(void)
 	//トライデントロゴを６０フレーム描画
 	if (cnt > 180)
 	{
-		g_NextScene = TITLE;
+		game->Transition(TITLE);
+		game->UpdateGame();
 	}
 }
 

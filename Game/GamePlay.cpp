@@ -43,6 +43,7 @@ GamePlay::~GamePlay(void)
 {
 	delete player;
 	delete enemy;
+
 }
 
 
@@ -60,11 +61,6 @@ void GamePlay::Update(void)
 	//ここで設定するのは速度
 
 	//キー入力関係
-	//マウス
-	player->SetSpdX(g_mouse.x - mx);
-	mx = g_mouse.x;
-	player->SetSpdY(g_mouse.y - my);
-	my = g_mouse.y;
 
 	//プレイヤーの座標変更
 	player->Update();
@@ -73,7 +69,8 @@ void GamePlay::Update(void)
 	//スペースキーでプレイに遷移
 	if (g_keyTracker->pressed.Space)
 	{
-		g_NextScene = OVER;
+		game->Transition(TITLE);
+		game->UpdateGame();
 	}
 }
 

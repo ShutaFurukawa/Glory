@@ -16,6 +16,7 @@ class GameTitle :public GameBase
 {
 private:
 	int cnt;		//フレームカウント
+	GameMain* game;		//ゲームメイン
 
 public:
 	//コンストラクタ
