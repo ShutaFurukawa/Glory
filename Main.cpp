@@ -78,7 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DirectXTK_Initialize();
 
 
-	GameMain Main;		//ゲームの初期化処理
+	GameMain main;		//ゲームの初期化処理
 
 
 	// メインループ
@@ -106,7 +106,34 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				break;
 			}
 
-			Main.UpdateGame();		//ゲームの更新処理
+
+			//シーン遷移関係
+			if (main.GetScene() == TITLE)
+			{
+				if (g_keyTracker->pressed.Space)
+				{
+					main.Transition(PLAY);
+				}
+			}
+			else if (main.GetScene() == PLAY)
+			{
+				if (g_keyTracker->pressed.Space)
+				{
+					main.Transition(CLEAR);
+				}
+				if (g_keyTracker->pressed.Z)
+				{
+					main.Transition(OVER);
+				}
+			}
+			else if (main.GetScene() == CLEAR || main.GetScene() == OVER)
+			{
+				if (g_keyTracker->pressed.Space)
+				{
+					main.Transition(TITLE);
+				}
+			}
+			main.UpdateGame();		//ゲームの更新処理
 
 
 			// バックバッファのクリア
@@ -119,7 +146,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			g_spriteBatch->Begin(SpriteSortMode_Deferred, g_pCommonStates->NonPremultiplied(), g_pCommonStates->PointClamp());
 
 
-			Main.RenderGame();		//ゲームの描画処理
+			main.RenderGame();		//ゲームの描画処理
 
 
 			//// fpsの表示
@@ -224,4 +251,3 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
-

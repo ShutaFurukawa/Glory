@@ -48,8 +48,6 @@ void GameOver::Update(void)
 	//スペースキーでタイトルに遷移
 	if (g_mouseTracker->leftButton)
 	{
-		game->Transition(PLAY);
-		game->UpdateGame();
 	}
 
 }

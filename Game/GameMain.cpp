@@ -43,13 +43,13 @@ GameMain::GameMain()
 	m_scene = PLAY;
 	m_NextScene = m_scene;
 
-	base = new GamePlay();
+	base = new GamePlay;
 
 	//音の読み込み
 	//g_se = LoadSoundMem("Resources\\Sounds\\SE00.ogg");
-	ADX2Le::Initialize("Resources\\Sounds\\NewProject.acf");
-	ADX2Le::LoadAcb("Resources\\Sounds\\CueSheet_0.acb");
-	ADX2Le::Play(CRI_CUESHEET_0__CUE_ID_0);
+	//ADX2Le::Initialize("Resources\\Sounds\\NewProject.acf");
+	//ADX2Le::LoadAcb("Resources\\Sounds\\CueSheet_0.acb");
+	//ADX2Le::Play(CRI_CUESHEET_0__CUE_ID_0);
 
 }
 
@@ -58,7 +58,7 @@ GameMain::GameMain()
 //----------------------------------------------------------------------
 GameMain::~GameMain()
 {
-	ADX2Le::Finalize();
+	//ADX2Le::Finalize();
 	delete base;
 }
 
@@ -96,9 +96,7 @@ void GameMain::UpdateGame(void)
 		case OVER:
 			base = new GameOver();
 			break;
-
 		}
-
 	}
 
 	base->Update();
@@ -114,6 +112,30 @@ void GameMain::UpdateGame(void)
 void GameMain::RenderGame(void)
 {
 	base->Render();
+}
+
+//----------------------------------------------------------------------
+//! @brief 数値描画処理
+//!
+//! @param[in] xy座標，数値w
+//!
+//! @return なし
+//----------------------------------------------------------------------
+void GameMain::Transition(SCENE scene)
+{
+	m_NextScene = scene;
+}
+
+//----------------------------------------------------------------------
+//! @brief 数値描画処理
+//!
+//! @param[in] xy座標，数値w
+//!
+//! @return なし
+//----------------------------------------------------------------------
+SCENE GameMain::GetScene()
+{
+	return m_NextScene;
 }
 
 //----------------------------------------------------------------------
@@ -143,18 +165,6 @@ void GameMain::DrawNum(int x, int y, int n)
 		}
 	}
 
-}
-
-//----------------------------------------------------------------------
-//! @brief シーン遷移処理
-//!
-//! @param[in] シーン情報
-//!
-//! @return なし
-//----------------------------------------------------------------------
-void GameMain::Transition(int NextScene)
-{
-	m_NextScene = NextScene;
 }
 
 //----------------------------------------------------------------------

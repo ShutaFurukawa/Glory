@@ -51,8 +51,6 @@ void GameLogo::Update(void)
 	//ƒgƒ‰ƒCƒfƒ“ƒgƒƒS‚ð‚U‚OƒtƒŒ[ƒ€•`‰æ
 	if (cnt > 180)
 	{
-		game->Transition(TITLE);
-		game->UpdateGame();
 	}
 }
 

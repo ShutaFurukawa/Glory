@@ -49,15 +49,15 @@ class GameMain
 {
 	//非公開メンバ
 private:
-	int m_scene;				//シーン管理
-	int m_NextScene;			//次のシーン
+	SCENE m_scene;				//シーン管理
+	SCENE m_NextScene;			//次のシーン
 
 	int g_TimeCnt;				//時間カウンタ
 	int g_Time;					//秒数
 
-	wchar_t m_buf[256];			//文字列編集用
+	wchar_t m_buf[256];				//文字列編集用
 
-	GameBase *base;				//ゲームベースのオブジェクト
+	GameBase *base;			//ゲームベースのオブジェクト
 
 	//公開メンバ
 public:
@@ -72,8 +72,10 @@ public:
 	void RenderGame(void);
 	// 数値描画処理
 	void DrawNum(int x, int y, int n);
-	// シーン遷移処理
-	void Transition(int NextScene);
+	//シーン遷移処理
+	void Transition(SCENE scene);
+	//シーン取得関数
+	SCENE GetScene();
 	// 文字列描画処理
 	void DrawString(int x, int y, std::string str);
 };

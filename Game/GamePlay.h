@@ -13,6 +13,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "GameMain.h"
 
 class GamePlay :public GameBase
 {
@@ -25,8 +26,6 @@ private:
 	Player* player;
 	//エネミーオブジェクト
 	Enemy* enemy;
-
-	GameMain* game;		//ゲームメイン
 
 public:
 

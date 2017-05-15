@@ -52,8 +52,6 @@ void GameClear::Update(void)
 	//スペースキーでタイトルに遷移
 	if (g_keyTracker->pressed.Space)
 	{
-		game->Transition(TITLE);
-		game->UpdateGame();
 	}
 
 }

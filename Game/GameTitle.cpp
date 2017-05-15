@@ -51,8 +51,6 @@ void GameTitle::Update(void)
 	//スペースキーでプレイに遷移
 	if (g_keyTracker->pressed.Space)
 	{
-		game->Transition(PLAY);
-		game->UpdateGame();
 	}
 }
 

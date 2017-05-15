@@ -9,7 +9,6 @@
 //*--------------------------------------------------------------*//
 
 // ヘッダファイルの読み込み ================================================
-#include "GameMain.h"
 #include "GamePlay.h"
 #include "ObjectBase.h"
 #include "Player.h"
@@ -66,11 +65,10 @@ void GamePlay::Update(void)
 	player->Update();
 	enemy->Update();
 
-	//スペースキーでプレイに遷移
+	//スペースキーでタイトルに遷移
 	if (g_keyTracker->pressed.Space)
 	{
-		game->Transition(TITLE);
-		game->UpdateGame();
+
 	}
 }
 
